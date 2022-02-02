@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 const App = () => {
   const name = 'Sanjib';
@@ -10,11 +10,28 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text> welcome {getFullName('Sanjib', 'Suna')} </Text>
-      <View>
-        <View style={styles.child} />
-        <View style={styles.child} />
-        <View style={styles.child} />
+      <Text style={{color: 'black', fontSize: 20}}>
+        {' '}
+        Welcome {getFullName('Sanjib', 'Suna')}{' '}
+      </Text>
+      <View style={styles.subContainer}>
+        <TouchableOpacity style={[styles.child, {backgroundColor: 'red'}]} />
+        <TouchableOpacity style={[styles.child, {backgroundColor: 'orange'}]} />
+        <TouchableOpacity style={[styles.child, {backgroundColor: 'green'}]} />
+      </View>
+      <View
+        style={{
+          height: 200,
+          width: 200,
+          borderRadius: 100,
+          alignItems: 'center',
+        }}>
+        <Image
+          style={styles.imageStyle}
+          source={{
+            uri: 'https://static.toiimg.com/thumb/msid-58475411,width-748,height-499,resizemode=4,imgsize-142947/.jpg',
+          }}
+        />
       </View>
     </View>
   );
@@ -23,12 +40,29 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#234',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  subContainer: {
+    height: 100,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   child: {
     backgroundColor: 'red',
+    height: 60,
+    width: 100,
+    borderRadius: 10,
+    margin: 5,
+  },
+  imageStyle: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    // resizeMode: 'stretch',
   },
 });
 
