@@ -6,7 +6,10 @@ class State extends Component {
    state = {
       text: 'Click here'
    }
-   updateState = () ⇒ this.setState({ text: 'The state is updated' })
+   updateState = () => {
+      this.setState({ text: 'The state is updated' });
+   }
+
    render() {
       return (
          <View>
