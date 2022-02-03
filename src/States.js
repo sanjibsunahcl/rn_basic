@@ -14,7 +14,7 @@ class State extends Component {
       return (
          <View>
             <Text onPress = {this.updateState}>
-               {this.state.myState}
+               {this.state.text}
             </Text>
          </View>
       );
