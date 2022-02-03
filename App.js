@@ -1,5 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import Parent from './src/components';
+import IdleTimer from './src/idleTimer';
+import State from './src/States';
 
 const App = () => {
   const name = 'Sanjib';
@@ -9,31 +12,36 @@ const App = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={{color: 'black', fontSize: 20}}>
-        {' '}
-        Welcome {getFullName('Sanjib', 'Suna')}{' '}
-      </Text>
-      <View style={styles.subContainer}>
-        <TouchableOpacity style={[styles.child, {backgroundColor: 'red'}]} />
-        <TouchableOpacity style={[styles.child, {backgroundColor: 'orange'}]} />
-        <TouchableOpacity style={[styles.child, {backgroundColor: 'green'}]} />
-      </View>
-      <View
-        style={{
-          height: 200,
-          width: 200,
-          borderRadius: 100,
-          alignItems: 'center',
-        }}>
-        <Image
-          style={styles.imageStyle}
-          source={{
-            uri: 'https://static.toiimg.com/thumb/msid-58475411,width-748,height-499,resizemode=4,imgsize-142947/.jpg',
-          }}
-        />
-      </View>
-    </View>
+    // <View style={styles.container}>
+    //   <Text style={{color: 'black', fontSize: 20}}>
+    //     {' '}
+    //     Welcome {getFullName('Sanjib', 'Suna')}{' '}
+    //   </Text>
+    //   <View style={styles.subContainer}>
+    //     <TouchableOpacity style={[styles.child, {backgroundColor: 'red'}]} />
+    //     <TouchableOpacity style={[styles.child, {backgroundColor: 'orange'}]} />
+    //     <TouchableOpacity style={[styles.child, {backgroundColor: 'green'}]} />
+    //   </View>
+    //   <View
+    //     style={{
+    //       height: 200,
+    //       width: 200,
+    //       borderRadius: 100,
+    //       alignItems: 'center',
+    //     }}>
+    //     <Image
+    //       style={styles.imageStyle}
+    //       source={{
+    //         uri: 'https://static.toiimg.com/thumb/msid-58475411,width-748,height-499,resizemode=4,imgsize-142947/.jpg',
+    //       }}
+    //     />
+    //   </View>
+    // </View>
+    <>
+    {/* <Parent></Parent> */}
+    {/* <State></State> */}
+    <IdleTimer></IdleTimer>
+    </>
   );
 };
 
