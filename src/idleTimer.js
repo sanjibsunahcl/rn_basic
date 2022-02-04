@@ -7,15 +7,32 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  AppState,
 } from 'react-native';
 
 export default class IdleTimer extends Component {
   state = {
     show: false,
+    appState: AppState.currentState,
   };
   _panResponder = {};
   timer = 0;
   componentDidMount() {
+    this.appStateSubscription = AppState.addEventListener(
+      'change',
+      nextAppState => {
+        if (
+          this.state.appState.match(/inactive|background/) &&
+          nextAppState === 'active'
+        ) {
+          console.log('App has come to the foreground state!');
+        } else {
+          console.log('Goes to background state', nextAppState);
+        }
+        this.setState({appState: nextAppState});
+      },
+    );
+
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => {
         this.resetTimer();
@@ -33,7 +50,7 @@ export default class IdleTimer extends Component {
     this.timer = setTimeout(() => {
       this.setState({show: true});
       console.log('idle state clear');
-    }, 1000 * 120 );
+    }, 1000 * 2);
   }
 
   resetTimer() {
@@ -42,7 +59,11 @@ export default class IdleTimer extends Component {
     this.timer = setTimeout(() => {
       this.setState({show: true});
       console.log('idle state clear');
-    }, 1000 * 120);
+    }, 1000 * 2);
+  }
+
+  componentWillUnmount() {
+    this.appStateSubscription.remove();
   }
 
   render() {
@@ -54,7 +75,7 @@ export default class IdleTimer extends Component {
         {this.state.show ? (
           <Text style={{fontSize: 30}}>Idle State Timer Expired : 18sec</Text>
         ) : null}
-        
+
         {/* <TouchableOpacity>
           <Image
             style={{width: 300, height: 300}}

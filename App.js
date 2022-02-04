@@ -1,8 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import fetch from './src/apiCall/fetch';
 import Parent from './src/components';
+import HocExample from './src/hoc/HocExample';
 import IdleTimer from './src/idleTimer';
 import State from './src/States';
+import Fetch from './src/apiCall/fetch';
 
 const App = () => {
   const name = 'Sanjib';
@@ -40,7 +43,9 @@ const App = () => {
     <>
     {/* <Parent></Parent> */}
     {/* <State></State> */}
-    <IdleTimer></IdleTimer>
+    {/* <IdleTimer></IdleTimer> */}
+    {/* <HocExample></HocExample> */}
+    <Fetch></Fetch>
     </>
   );
 };
