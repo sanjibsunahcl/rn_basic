@@ -11,6 +11,27 @@ export default Fetch = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  const getData = async () => {
+    //GET request
+    await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+      method: 'GET',
+      //Request Type
+    })
+      .then(response => response.json())
+      //If response is in json then in success
+      .then(responseJson => {
+        //Success
+        alert(JSON.stringify(responseJson));
+        console.log(responseJson);
+      })
+      //If response is not in json then in error
+      .catch(error => {
+        //Error
+        alert(JSON.stringify(error));
+        console.error(error);
+      });
+  };
+
   const getMovies = async () => {
     setLoading(true);
     setData([]);

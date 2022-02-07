@@ -6,6 +6,8 @@ import HocExample from './src/hoc/HocExample';
 import IdleTimer from './src/idleTimer';
 import State from './src/States';
 import Fetch from './src/apiCall/fetch';
+import Axios from './src/apiCall/axios';
+import RootNavigator from './src/navigation/rootNavigator';
 
 const App = () => {
   const name = 'Sanjib';
@@ -45,7 +47,9 @@ const App = () => {
     {/* <State></State> */}
     {/* <IdleTimer></IdleTimer> */}
     {/* <HocExample></HocExample> */}
-    <Fetch></Fetch>
+    {/* <Fetch></Fetch> */}
+    {/* <Axios></Axios> */}
+    <RootNavigator></RootNavigator>
     </>
   );
 };
