@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import * as NavigationService from '../navigation/navigationService'
+
 
 export default List = props => {
   const [isLoading, setLoading] = useState(true);
@@ -40,7 +42,7 @@ export default List = props => {
           padding: 10,
           borderRadius: 5,
         }}
-        onPress={() => props.navigation.navigate('Details', {data: item})}>
+        onPress={() => NavigationService.navigateTo('Details', {data: item})}>
         <Text style={{fontSize: 20}}>
           {item.title}, {item.releaseYear}
         </Text>

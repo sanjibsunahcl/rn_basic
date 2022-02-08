@@ -45,11 +45,11 @@ const App = () => {
     <>
     {/* <Parent></Parent> */}
     {/* <State></State> */}
-    {/* <IdleTimer></IdleTimer> */}
+    <IdleTimer></IdleTimer>
     {/* <HocExample></HocExample> */}
     {/* <Fetch></Fetch> */}
     {/* <Axios></Axios> */}
-    <RootNavigator></RootNavigator>
+    {/* <RootNavigator></RootNavigator> */}
     </>
   );
 };
