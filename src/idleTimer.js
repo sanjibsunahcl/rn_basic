@@ -9,6 +9,7 @@ import {
   Image,
   AppState,
 } from 'react-native';
+import BackgroundTimer from 'react-native-background-timer';
 
 export default class IdleTimer extends Component {
   state = {
@@ -28,29 +29,32 @@ export default class IdleTimer extends Component {
           console.log('App has come to the foreground state!');
         } else {
           console.log('Goes to background state', nextAppState);
+          BackgroundTimer.setTimeout(() => {
+            console.log('after 15 sec on background');
+          }, 15000);
         }
         this.setState({appState: nextAppState});
       },
     );
 
-    this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => {
-        this.resetTimer();
-        return true;
-      },
-      onMoveShouldSetPanResponder: () => true,
-      onStartShouldSetPanResponderCapture: () => {
-        // this.resetTimer();
-        return false;
-      },
-      onMoveShouldSetPanResponderCapture: () => false,
-      onPanResponderTerminationRequest: () => true,
-      onShouldBlockNativeResponder: () => false,
-    });
-    this.timer = setTimeout(() => {
-      this.setState({show: true});
-      console.log('idle state clear');
-    }, 1000 * 2);
+    // this._panResponder = PanResponder.create({
+    //   onStartShouldSetPanResponder: () => {
+    //     this.resetTimer();
+    //     return true;
+    //   },
+    //   onMoveShouldSetPanResponder: () => true,
+    //   onStartShouldSetPanResponderCapture: () => {
+    //     // this.resetTimer();
+    //     return false;
+    //   },
+    //   onMoveShouldSetPanResponderCapture: () => false,
+    //   onPanResponderTerminationRequest: () => true,
+    //   onShouldBlockNativeResponder: () => false,
+    // });
+    // this.timer = setTimeout(() => {
+    //   this.setState({show: true});
+    //   console.log('idle state clear');
+    // }, 1000 * 2);
   }
 
   resetTimer() {
