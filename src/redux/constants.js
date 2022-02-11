@@ -1,0 +1,4 @@
+export const START_REQUEST = 'START_REQUEST';
+export const END_REQUEST = 'END_REQUEST';
+export const RESP_ERROR = 'RESP_ERROR';
+export const GET_RESPONSE_DATA = 'GET_RESPONSE_DATA';
