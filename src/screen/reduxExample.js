@@ -28,11 +28,12 @@ class ReduxExample extends Component {
 
   render() {
     const {isLoading} = this.props;
+    console.log('isLoading app ' + isLoading);
     const {data} = this.state;
     console.log('main data' + JSON.stringify(data));
     return (
       <View style={{flex: 1, padding: 24, justifyContent: 'center'}}>
-        {data.length === 0 ? (
+        {isLoading ? (
           <ActivityIndicator size={'large'} style={{alignSelf: 'center'}} />
         ) : (
           <FlatList
@@ -51,10 +52,10 @@ class ReduxExample extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log('responseData nnn' + JSON.stringify(state));
+  console.log('responseData nnn' + JSON.stringify(state));
   return {
     responseData: state.demo.responseData,
-    isloading: state.demo.isLoading,
+    isLoading: state.demo.isLoading,
   };
 };
 function mapDispatchToProps(dispatch) {
