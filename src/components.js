@@ -9,7 +9,6 @@ import {
 
 const Child = props => {
   const [color, setColor] = useState(true);
-
   //mounting
   useEffect(() => {
     console.log('mounting example!');

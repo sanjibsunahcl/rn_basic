@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import * as NavigationService from '../navigation/navigationService'
-
+import Button from '../../storybook/stories/Button';
+import * as NavigationService from '../navigation/navigationService';
 
 export default List = props => {
   const [isLoading, setLoading] = useState(true);
@@ -52,6 +52,9 @@ export default List = props => {
 
   return (
     <View style={{flex: 1, padding: 24, justifyContent: 'center'}}>
+      <Button>
+        <Text>😀 😎 👍 💯</Text>
+      </Button>
       {isLoading ? (
         <ActivityIndicator size={'large'} style={{alignSelf: 'center'}} />
       ) : (

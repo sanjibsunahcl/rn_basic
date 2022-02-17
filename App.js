@@ -8,6 +8,7 @@ import State from './src/States';
 import Fetch from './src/apiCall/fetch';
 import Axios from './src/apiCall/axios';
 import RootNavigator from './src/navigation/rootNavigator';
+import NativeComponentApis from './src/nativeApis/nativeComponentApis';
 
 const App = () => {
   const name = 'Sanjib';
@@ -43,13 +44,14 @@ const App = () => {
     //   </View>
     // </View>
     <>
-    {/* <Parent></Parent> */}
-    {/* <State></State> */}
-    <IdleTimer></IdleTimer>
-    {/* <HocExample></HocExample> */}
-    {/* <Fetch></Fetch> */}
-    {/* <Axios></Axios> */}
-    {/* <RootNavigator></RootNavigator> */}
+      {/* <Parent></Parent> */}
+      {/* <State></State> */}
+      {/* <IdleTimer></IdleTimer> */}
+      {/* <HocExample></HocExample> */}
+      {/* <Fetch></Fetch> */}
+      {/* <Axios></Axios> */}
+      {/* <RootNavigator></RootNavigator> */}
+      <NativeComponentApis></NativeComponentApis>
     </>
   );
 };

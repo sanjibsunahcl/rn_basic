@@ -13,6 +13,7 @@ import BottomMenu from './tabsNavigator';
 
 const Stack = createStackNavigator();
 
+// const Drawer = createDrawerNavigator();
 
 const RootNavigator = () => {
   return (
