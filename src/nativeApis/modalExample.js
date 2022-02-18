@@ -6,9 +6,16 @@ import {
   Text,
   TouchableOpacity,
   View,
+  PixelRatio,
 } from 'react-native';
 
 const ModalExample = () => {
+  console.log(PixelRatio.getFontScale() + ' font Scale');
+  console.log(PixelRatio.get() + ' get Scale');
+  console.log(
+    PixelRatio.getPixelSizeForLayoutSize(20) +
+      ' getPixelSizeForLayoutSize Scale',
+  );
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -74,6 +81,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+    fontSize: 20 / PixelRatio.getFontScale(),
   },
 });
 

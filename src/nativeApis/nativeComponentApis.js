@@ -13,6 +13,8 @@ import DrawerLayoutExample from './drawerLayoutAndroid';
 import KeyboardAvoidingExample from './keyBoardAvoidingView';
 import ModalExample from './modalExample';
 import PermisionExample from './permissionAndroid';
+import RefreshControlExample from './refreshControlApi';
+import VirtualizedListExample from './virtualizedList';
 
 const NativeComponentApis = props => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -81,7 +83,9 @@ const NativeComponentApis = props => {
     // <PermisionExample></PermisionExample>
     // <AnimationExample></AnimationExample>
     // <KeyboardAvoidingExample></KeyboardAvoidingExample>
-    <ModalExample></ModalExample>
+    // <ModalExample></ModalExample>
+    // <RefreshControlExample></RefreshControlExample>
+    <VirtualizedListExample></VirtualizedListExample>
   );
 };
 
