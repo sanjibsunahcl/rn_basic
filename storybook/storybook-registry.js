@@ -1,2 +1,3 @@
-import './Button/Button.stories';
-import './Welcome/Welcome.stories';
+import './stories/./Button/Button.stories';
+import './stories/Welcome/Welcome.stories';
+// import '../src/stories/Button.stories';

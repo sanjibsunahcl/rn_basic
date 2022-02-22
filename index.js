@@ -8,7 +8,7 @@
 
 // AppRegistry.registerComponent(appName, () => App);
 
-// export {default} from './storybook';
+
 
 import App from './App';
 import {AppRegistry} from 'react-native';
@@ -23,3 +23,7 @@ if (__DEV__ && SHOW_STORYBOOK) {
 }
 
 AppRegistry.registerComponent(appName, () => RootComponent);
+
+
+//storybook set up
+// export {default} from './storybook';

@@ -6,7 +6,10 @@ import {
   StyleSheet,
   Text,
   StatusBar,
+  Image,
 } from 'react-native';
+import Button from '../components/button/Button';
+import Header from '../components/header/Header';
 
 const DATA = [];
 
@@ -26,6 +29,12 @@ const Item = ({title}) => (
 const VirtualizedListExample = () => {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar animated={true} backgroundColor="#234" />
+      <Header text={'Virtual List'} isBackButtonVisible={true} />
+      
+      {/* <Button style={{marginBottom: 20, marginVertical: 20}}>
+        <Text>😀 😎 👍 💯</Text>
+      </Button> */}
       <VirtualizedList
         data={DATA}
         initialNumToRender={15}
@@ -41,7 +50,7 @@ const VirtualizedListExample = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight,
+    // marginTop: StatusBar.currentHeight,
   },
   item: {
     backgroundColor: '#234',
@@ -53,6 +62,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    color:'white',
   },
 });
 

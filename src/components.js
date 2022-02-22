@@ -16,14 +16,14 @@ const Child = props => {
 
   //unmount
   useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      onClickBackHandler,
-    );
-    props.navigation.addListener('gestureStart', onClickBackHandler);
+    // const backHandler = BackHandler.addEventListener(
+    //   'hardwareBackPress',
+    //   onClickBackHandler,
+    // );
+    // props.navigation.addListener('gestureStart', onClickBackHandler);
     return () => {
-      backHandler.remove();
-      props.navigation.removeListener('gestureStart', onClickBackHandler);
+      // backHandler.remove();
+      // props.navigation.removeListener('gestureStart', onClickBackHandler);
     };
   }, []);
 

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Button from '../../storybook/stories/Button';
+import Button from '../components';
 import * as NavigationService from '../navigation/navigationService';
 
 export default List = props => {
