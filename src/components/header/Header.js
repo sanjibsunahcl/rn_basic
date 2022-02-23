@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import colors from '../../utils/colors';
 
-export default function Header({isBackButtonVisible, onPress, text}) {
+export default function Header({isBackButtonVisible, onBackPress, text}) {
   return (
     <View style={styles.container}>
       {isBackButtonVisible ? (
-        <TouchableOpacity style={styles.backBtnContainer}>
+        <TouchableOpacity style={styles.backBtnContainer} onPress={onBackPress}>
           <Image
             source={{
               uri: 'https://icons.iconarchive.com/icons/icons8/ios7/512/Arrows-Back-icon.png',

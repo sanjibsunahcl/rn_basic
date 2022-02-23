@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 import Button from '../components';
 import * as NavigationService from '../navigation/navigationService';
+import Header from '../components/header/Header';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 export default List = props => {
   const [isLoading, setLoading] = useState(true);
@@ -51,10 +54,8 @@ export default List = props => {
   };
 
   return (
-    <View style={{flex: 1, padding: 24, justifyContent: 'center'}}>
-      <Button>
-        <Text>😀 😎 👍 💯</Text>
-      </Button>
+    <SafeAreaView style={{flex: 1}}>
+      <Header text={'Listing'} isBackButtonVisible={false} />
       {isLoading ? (
         <ActivityIndicator size={'large'} style={{alignSelf: 'center'}} />
       ) : (
@@ -64,6 +65,6 @@ export default List = props => {
           renderItem={({item, index}) => renderMovieList(item, index)}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };

@@ -50,8 +50,8 @@ const App = () => {
       {/* <HocExample></HocExample> */}
       {/* <Fetch></Fetch> */}
       {/* <Axios></Axios> */}
-      {/* <RootNavigator></RootNavigator> */}
-      <NativeComponentApis></NativeComponentApis>
+      <RootNavigator></RootNavigator>
+      {/* <NativeComponentApis></NativeComponentApis> */}
     </>
   );
 };

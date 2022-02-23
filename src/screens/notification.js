@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Header from '../components/header/Header';
 
 export default Notifications = props => {
   //   console.log(props.route.params?.data);
@@ -14,11 +15,17 @@ export default Notifications = props => {
     <View
       style={{
         flex: 1,
-        padding: 24,
-        justifyContent: 'center',
-        alignItems: 'center',
       }}>
-      <Text style={{fontSize: 30}}>{'Notification'}</Text>
+      <Header
+        text={'Notification'}
+        isBackButtonVisible={true}
+        onBackPress={() => props.navigation.goBack()}
+      />
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <Text style={{fontSize: 30, textAlign: 'center'}}>
+          {'Notification'}
+        </Text>
+      </View>
     </View>
   );
 };

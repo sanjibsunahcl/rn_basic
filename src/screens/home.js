@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Header from '../components/header/Header';
 
 export default Home = props => {
   //   console.log(props.route.params?.data);
@@ -14,11 +15,15 @@ export default Home = props => {
     <View
       style={{
         flex: 1,
-        padding: 24,
-        justifyContent: 'center',
-        alignItems: 'center',
       }}>
-      <Text style={{fontSize: 30}}>{'Home'}</Text>
+      <Header
+        text={'Home'}
+        isBackButtonVisible={true}
+        onBackPress={() => props.navigation.goBack()}
+      />
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <Text style={{fontSize: 30, textAlign: 'center'}}>{'Home'}</Text>
+      </View>
     </View>
   );
 };

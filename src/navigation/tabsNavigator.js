@@ -35,8 +35,9 @@ const BottomMenu = () => {
       <Bottom.Screen
         name="Home"
         component={HomeScreen}
-        // options={{Shown: false}}
+        // options={{headerShown: false}}
         options={{
+          headerShown: false,
           tabBarIcon: ({color, size}) => (
             <Image
               source={{

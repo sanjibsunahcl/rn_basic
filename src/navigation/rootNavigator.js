@@ -29,9 +29,9 @@ const RootNavigator = () => {
         <Stack.Screen
           name="List"
           component={ListScreen}
-          // options={{
-          //   headerShown: false,
-          // }}
+          options={{
+            headerShown: false,
+          }}
         />
         <Stack.Screen
           name="Details"
