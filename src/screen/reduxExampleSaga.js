@@ -5,11 +5,14 @@ import {
   View,
   ActivityIndicator,
   FlatList,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 // import {ActionCreators} from '../../src/redux/actions';
 import {ActionCreators} from '../../src/reduxSaga/actions';
+import * as NavigationService from '../navigation/navigationService';
 
 class ReduxExampleSaga extends Component {
   constructor(props) {
@@ -30,6 +33,24 @@ class ReduxExampleSaga extends Component {
     }
   }
 
+  renderMovieList = (item, index) => {
+    return (
+      <TouchableOpacity
+        style={{
+          marginTop: 10,
+          borderColor: '#234',
+          borderWidth: 1,
+          padding: 10,
+          borderRadius: 5,
+        }}
+        onPress={() => NavigationService.navigateTo('Details', {data: item})}>
+        <Text style={{fontSize: 20}}>
+          {item.title}, {item.releaseYear}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
   render() {
     const {isLoading} = this.props;
     console.log('isLoading app ' + isLoading);
@@ -43,11 +64,7 @@ class ReduxExampleSaga extends Component {
           <FlatList
             data={data}
             keyExtractor={({id}, index) => id}
-            renderItem={({item}) => (
-              <Text style={{fontSize: 20}}>
-                {item.title}, {item.releaseYear}
-              </Text>
-            )}
+            renderItem={({item, index}) => this.renderMovieList(item, index)}
           />
         )}
       </View>
