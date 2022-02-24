@@ -7,12 +7,15 @@ import {PersistGate} from 'redux-persist/es/integration/react';
 // import {store} from './src/redux/stores/stores';
 import {store, persistor} from './src/reduxSaga/stores/stores';
 import ReduxExampleSaga from './src/screen/reduxExampleSaga';
+import RootNavigator from './src/navigation/rootNavigator';
+
 
 const App = () => {
   return (
     <Provider store={store}>
-      <ReduxExampleSaga></ReduxExampleSaga>
+      {/* <ReduxExampleSaga></ReduxExampleSaga> */}
       {/* <ReduxExample></ReduxExample> */}
+      <RootNavigator></RootNavigator>
     </Provider>
   );
 };
