@@ -51,20 +51,32 @@ class ReduxExampleSaga extends Component {
     );
   };
 
+  renderFooterItem = () => {
+    return (
+      <TouchableOpacity
+        style={styles.btnStyle}
+        onPress={() => NavigationService.navigateTo('Details')}>
+        <Text style={{color: 'white', fontSize: 18}}>GQL</Text>
+      </TouchableOpacity>
+    );
+  };
+
   render() {
     const {isLoading} = this.props;
     console.log('isLoading app ' + isLoading);
     const {data} = this.state;
     console.log('main data' + JSON.stringify(data));
     return (
-      <View style={{flex: 1, padding: 24, justifyContent: 'center'}}>
+      <View style={styles.container}>
         {isLoading ? (
           <ActivityIndicator size={'large'} style={{alignSelf: 'center'}} />
         ) : (
           <FlatList
             data={data}
+            style={{height: 100}}
             keyExtractor={({id}, index) => id}
             renderItem={({item, index}) => this.renderMovieList(item, index)}
+            ListFooterComponent={this.renderFooterItem()}
           />
         )}
       </View>
@@ -89,17 +101,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  btnStyle: {
+    backgroundColor: 'black',
+    width: 180,
+    height: 70,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginTop: 50,
   },
 });

@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import {gql, useQuery} from '@apollo/client';
+import {gql, useQuery, useLazyQuery} from '@apollo/client';
 import {FETCH_TODOS} from '../graphQl/queries/todoQuery';
 
 const CHAPTERS_QUERY = gql`
@@ -25,12 +25,42 @@ export default Home = props => {
   // console.log(JSON.stringify(data.chapters) + 'gql data');
 
   // const {data = {}, error, loading} = useQuery(FETCH_TODOS);
-  const {data, error, loading} = useQuery(FETCH_TODOS, {
-    variables: {isPublic: true},
+
+  const [responseData, setResponseData] = useState(null);
+
+  const {
+    data = {},
+    error,
+    loading,
+    refetch,
+  } = useQuery(FETCH_TODOS, {
+    variables: {isPublic: false},
+    //back pressed data update
+    options: {
+      fetchPolicy: 'cache-first',
+      errorPolicy: 'ignore',
+    },
   });
 
-  console.log(JSON.stringify(data) + 'gql Hasura data');
+  // console.log(JSON.stringify(data) + 'gql Hasura data');
 
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      //focus listener again performed query
+      if (refetch) {
+        refetch();
+      }
+    });
+    return unsubscribe;
+  }, [props.navigation, refetch]);
+
+  useEffect(() => {
+    if (data) {
+      setResponseData(data.todos);
+    }
+  }, [data]);
+
+  console.log('state Response data' + JSON.stringify(responseData));
   const ChapterItem = ({chapter}) => {
     const {number, title} = chapter;
     let header, subheader;
@@ -66,9 +96,13 @@ export default Home = props => {
           borderRadius: 5,
         }}
         onPress={() => alert(JSON.stringify(item))}>
+        {/* <Text
+          style={{fontSize: 18, color: 'black', textTransform: 'capitalize'}}>
+          {`User Name:- ${item.user.name}`}
+        </Text> */}
         <Text
           style={{fontSize: 18, color: 'black', textTransform: 'capitalize'}}>
-          {`Name:- ${item.user.name}`}
+          {`Todo title:- ${item.title}`}
         </Text>
         <Text style={{fontSize: 18, color: 'black'}}>
           {`Date:- ${new Date(item.created_at).toString().slice(0, 15)}`}
