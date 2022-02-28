@@ -15,11 +15,11 @@ export default Notifications = props => {
   //   console.log(props.route.params?.data);
   //   const {data} = props.route.params;
   const [text, setText] = useState('');
-  const [insertTodo, {data = {}, loading, error}] = useMutation(INSERT_TODO);
+  const [insertTodos, {data = {}, loading, error}] = useMutation(INSERT_TODO);
 
   const submit = () => {
     setText('');
-    insertTodo({
+    insertTodos({
       // variables: {text, isPublic},
       variables: {text: text, isPublic: false},
     });
