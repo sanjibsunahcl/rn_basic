@@ -45,28 +45,31 @@ export default Home = props => {
     },
   });
 
-  // console.log(JSON.stringify(error) + 'gql Hasura data');
+  console.log(JSON.stringify(error) + 'gql Hasura data error');
 
   const [
     deleteTodo,
     {data: deleteData, loading: deleting, error: deleteError},
-  ] = useMutation(REMOVE_TODO);
+  ] = useMutation(REMOVE_TODO,{
+    refetchQueries: [FETCH_TODOS],
+  });
 
-  useEffect(() => {
-    const unsubscribe = props.navigation.addListener('focus', () => {
-      //focus listener again performed query
-      if (refetch) {
-        refetch();
-      }
-    });
-    return unsubscribe;
-  }, [props.navigation, refetch]);
+  // useEffect(() => {
+  //   const unsubscribe = props.navigation.addListener('focus', () => {
+  //     //focus listener again performed query
+  //     if (refetch) {
+  //       refetch();
+  //     }
+  //   });
+  //   return unsubscribe;
+  // }, [props.navigation, refetch]);
 
-  useEffect(() => {
-    if (data) {
-      setResponseData(data.todos);
-    }
-  }, [data]);
+
+  // useEffect(() => {
+  //   if (data) {
+  //     setResponseData(data.todos);
+  //   }
+  // }, [data]);
 
   // console.log('state Response data' + JSON.stringify(responseData));
   const ChapterItem = ({chapter}) => {
@@ -98,13 +101,13 @@ export default Home = props => {
     console.log('removeData' + JSON.stringify(deleteData));
   };
 
-  useEffect(() => {
-    if (deleteData) {
-      let filteredArray = responseData.filter(item => item.id !== removeId);
-      console.log('filteredarray' + JSON.stringify(filteredArray));
-      setResponseData(filteredArray);
-    }
-  }, [deleteData]);
+  // useEffect(() => {
+  //   if (deleteData) {
+  //     let filteredArray = responseData.filter(item => item.id !== removeId);
+  //     console.log('filteredarray' + JSON.stringify(filteredArray));
+  //     setResponseData(filteredArray);
+  //   }
+  // }, [deleteData]);
 
   const TodoItem = ({item, isPublic}) => {
     return (
@@ -139,7 +142,7 @@ export default Home = props => {
         flex: 1,
       }}>
       <View style={{flex: 1, justifyContent: 'center'}}>
-        {loading || deleting ? (
+        {loading  ? (
           <ActivityIndicator
             size={'large'}
             style={{alignSelf: 'center'}}
@@ -147,7 +150,7 @@ export default Home = props => {
           />
         ) : (
           <FlatList
-            data={responseData}
+            data={data.todos}
             renderItem={({item}) => <TodoItem item={item} />}
             keyExtractor={item => item.id.toString()}
           />

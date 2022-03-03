@@ -8,14 +8,19 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-import {useMutation} from '@apollo/client';
+import {useMutation, useSubscription} from '@apollo/client';
 import {INSERT_TODO} from '../graphQl/mutation/insertTodo';
+import {FETCH_TODOS} from '../graphQl/queries/todoQuery';
+import {SUBSCRIBE_TO_ONLINE_USERS} from '../graphQl/subscription/todoSubscription';
 
 export default Notifications = props => {
   //   console.log(props.route.params?.data);
   //   const {data} = props.route.params;
   const [text, setText] = useState('');
-  const [insertTodos, {data = {}, loading, error}] = useMutation(INSERT_TODO);
+  const [insertTodos, {data = {}, loading, error}] = useMutation(INSERT_TODO, {
+    //perform refetch immediately after performing mutation
+    refetchQueries: [FETCH_TODOS],
+  });
 
   const submit = () => {
     setText('');
@@ -29,16 +34,57 @@ export default Notifications = props => {
   console.log('mutationData v' + JSON.stringify(data));
   console.log('mutationError' + JSON.stringify(error));
 
+  const {
+    data: subsCriptionData = {},
+    error: subsCriptionError,
+    loading: subsCriptionLoading,
+  } = useSubscription(SUBSCRIBE_TO_ONLINE_USERS);
+
+  console.log('SubscriptionData' + JSON.stringify(subsCriptionData));
+  // console.log('SubscriptionDataError' + JSON.stringify(subsCriptionError));
+
+  const ItemList = ({item}) => {
+    return (
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => alert(JSON.stringify(item))}>
+        {/* <Text
+          style={{fontSize: 18, color: 'black', textTransform: 'capitalize'}}>
+          {`User Name:- ${item.user.name}`}
+        </Text> */}
+        <View>
+          <Text
+            style={{fontSize: 18, color: 'black', textTransform: 'capitalize'}}>
+            {`User name:- ${item.user.name}`}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.mainContainer}>
-      <Text style={{fontSize: 18, color: 'black'}}>GraphQL Mutation</Text>
-      {loading ? (
+      <Text style={{fontSize: 18, color: 'black', marginTop: 10}}>
+        GraphQL Subscription
+      </Text>
+      {loading || subsCriptionLoading ? (
         <ActivityIndicator
           size={'large'}
           style={{alignSelf: 'center'}}
           color={'black'}
         />
-      ) : null}
+      ) : (
+        <View style={{height: 200}}>
+          <FlatList
+            data={subsCriptionData.online_users}
+            renderItem={({item}) => <ItemList item={item} />}
+            keyExtractor={item => item.id.toString()}
+          />
+        </View>
+      )}
+      <Text style={{fontSize: 18, color: 'black', marginTop: 10}}>
+        GraphQL Mutation
+      </Text>
       <View style={styles.textboxContainer}>
         <TextInput
           style={styles.textbox}
@@ -89,5 +135,17 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: 'bold',
     color: 'white',
+  },
+  itemContainer: {
+    backgroundColor: 'white',
+    marginTop: 10,
+    borderColor: 'black',
+    borderWidth: 1,
+    padding: 15,
+    marginStart: 10,
+    marginEnd: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
