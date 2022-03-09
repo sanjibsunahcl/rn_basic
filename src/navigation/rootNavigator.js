@@ -5,7 +5,7 @@ import * as NavigationService from '../navigation/navigationService';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BottomMenu from './tabsNavigator';
 import ReduxExampleSaga from '../screen/reduxExampleSaga';
-
+import SQLiteScreen from '../screen/sqlite';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +25,13 @@ const RootNavigator = () => {
         <Stack.Screen
           name="List"
           component={ReduxExampleSaga}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="SQLite"
+          component={SQLiteScreen}
           options={{
             headerShown: false,
           }}

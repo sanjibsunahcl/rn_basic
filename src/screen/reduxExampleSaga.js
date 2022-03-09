@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 // import {ActionCreators} from '../../src/redux/actions';
 import {ActionCreators} from '../../src/reduxSaga/actions';
 import * as NavigationService from '../navigation/navigationService';
+import {openDatabase} from 'react-native-sqlite-storage';
 
 class ReduxExampleSaga extends Component {
   constructor(props) {
@@ -24,7 +25,72 @@ class ReduxExampleSaga extends Component {
 
   componentDidMount() {
     this.props.geApiDataAction();
+    this.dataBaseOpen();
   }
+
+  dataBaseOpen = async () => {
+    console.log('Component did mount called');
+    let db = await openDatabase({name: 'UserDatabase.db'});
+    db.transaction(function (txn) {
+      txn.executeSql(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='table_user'",
+        [],
+        function (tx, res) {
+          console.log('item:', res.rows.length);
+          if (res.rows.length == 0) {
+            txn.executeSql('DROP TABLE IF EXISTS table_user', []);
+            txn.executeSql(
+              'CREATE TABLE IF NOT EXISTS table_user(user_id INTEGER PRIMARY KEY AUTOINCREMENT, user_name VARCHAR(20), user_contact INT(10), user_address VARCHAR(255))',
+              [],
+            );
+          }
+        },
+      );
+    });
+  };
+
+  checkFirstTimeUsage = async database => {
+    let firstTimeUsage = null;
+    await database
+      .transaction(tx => {
+        tx.executeSql(
+          "SELECT name FROM sqlite_master WHERE type='table' AND name='table_user",
+          null,
+        ).then(([tx, results]) => {
+          if (results.rows.length === 0) {
+            firstTimeUsage = true;
+          } else {
+            console.log('rows length greater than 0');
+            firstTimeUsage = false;
+          }
+        });
+      })
+      .catch((error: any) => {
+        console.log(error);
+        firstTimeUsage = false;
+      });
+    return firstTimeUsage;
+  };
+
+  createTable = async database => {
+    console.log('Creating table');
+    database.transaction(function (txn) {
+      txn.executeSql(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='table_user'",
+        [],
+        function (tx, res) {
+          console.log('item:', res.rows.length);
+          // if (res.rows.length == 0) {
+          txn.executeSql('DROP TABLE IF EXISTS table_user', []);
+          txn.executeSql(
+            'CREATE TABLE IF NOT EXISTS table_user(user_id INTEGER PRIMARY KEY AUTOINCREMENT, user_name VARCHAR(20), user_contact INT(10), user_address VARCHAR(255))',
+            [],
+          );
+          // }
+        },
+      );
+    });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.responseData !== this.props.responseData) {
@@ -53,19 +119,26 @@ class ReduxExampleSaga extends Component {
 
   renderFooterItem = () => {
     return (
-      <TouchableOpacity
-        style={styles.btnStyle}
-        onPress={() => NavigationService.navigateTo('Details')}>
-        <Text style={{color: 'white', fontSize: 18}}>GQL</Text>
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity
+          style={styles.btnStyle}
+          onPress={() => NavigationService.navigateTo('Details')}>
+          <Text style={{color: 'white', fontSize: 18}}>GQL</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.btnStyle}
+          onPress={() => NavigationService.navigateTo('SQLite')}>
+          <Text style={{color: 'white', fontSize: 18}}>SQLite</Text>
+        </TouchableOpacity>
+      </View>
     );
   };
 
   render() {
     const {isLoading} = this.props;
-    console.log('isLoading app ' + isLoading);
+    // console.log('isLoading app ' + isLoading);
     const {data} = this.state;
-    console.log('main data' + JSON.stringify(data));
+    // console.log('main data' + JSON.stringify(data));
     return (
       <View style={styles.container}>
         {isLoading ? (
@@ -85,7 +158,7 @@ class ReduxExampleSaga extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('responseData nnn' + JSON.stringify(state));
+  // console.log('responseData nnn' + JSON.stringify(state));
   return {
     responseData: state.demo.responseData,
     isLoading: state.demo.isLoading,
