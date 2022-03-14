@@ -9,8 +9,12 @@ const Items = () => {
     setTimeout(() => {
       settimeoutStatus('timeout is called');
     }, 1000);
-    console.log('effect is called');
   }, []);
+
+  const btnClick = () => {
+    setStatus('button pressed');
+    console.log('btn Pressed');
+  };
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -18,10 +22,7 @@ const Items = () => {
       <Text style={{fontSize: 18, color: 'black'}}>Items</Text>
       <Text testID="timeOutText">{timeoutStatus}</Text>
       <Text testID="myText">{status}</Text>
-      <Button
-        testID="myButton"
-        onPress={() => setStatus('button pressed')}
-        title="Click"></Button>
+      <Button testID="myButton" onPress={btnClick} title="Click"></Button>
     </View>
   );
 };
