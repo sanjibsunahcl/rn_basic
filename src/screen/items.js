@@ -4,6 +4,7 @@ import {Text, View, Button} from 'react-native';
 const Items = () => {
   const [status, setStatus] = useState('');
   const [timeoutStatus, settimeoutStatus] = useState('');
+  const [count, setCount] = useState(4);
 
   useEffect(() => {
     setTimeout(() => {
@@ -16,6 +17,8 @@ const Items = () => {
     console.log('btn Pressed');
   };
 
+  const dataChange = x => x * 10;
+  
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Sanjib</Text>

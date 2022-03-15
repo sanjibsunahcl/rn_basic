@@ -15,4 +15,8 @@ describe('<ItemsEnzyme />', () => {
   it('renders correctly, test using Jest + Enzyme', () => {
     expect(shallow(<ItemsEnzyme />)).toMatchSnapshot();
   });
+
+  it('should render button', () => {
+    const wrapper = shallow(<ItemsEnzyme />);
+  });
 });

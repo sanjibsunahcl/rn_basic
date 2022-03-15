@@ -20,7 +20,7 @@ test('button press', () => {
 });
 
 test('call timeout', () => {
-  act(() => jest.runAllTimers());  
+  act(() => jest.runAllTimers());
   const text = tree.root.findByProps({testID: 'timeOutText'}).props;
   expect(text.children).toEqual('timeout is called');
 });
