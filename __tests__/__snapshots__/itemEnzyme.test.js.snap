@@ -9,6 +9,7 @@ exports[`<ItemsEnzyme /> renders correctly, test using Jest + Enzyme 1`] = `
       "justifyContent": "center",
     }
   }
+  testID="todo-item"
 >
   <Text>
     Sanjib

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, Button} from 'react-native';
 
+
 const Items = () => {
   const [status, setStatus] = useState('');
   const [timeoutStatus, settimeoutStatus] = useState('');
@@ -16,8 +17,6 @@ const Items = () => {
     setStatus('button pressed');
     console.log('btn Pressed');
   };
-
-  const dataChange = x => x * 10;
   
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

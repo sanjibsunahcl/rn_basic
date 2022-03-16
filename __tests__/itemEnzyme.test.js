@@ -15,8 +15,13 @@ describe('<ItemsEnzyme />', () => {
   it('renders correctly, test using Jest + Enzyme', () => {
     expect(shallow(<ItemsEnzyme />)).toMatchSnapshot();
   });
+});
 
-  it('should render button', () => {
-    const wrapper = shallow(<ItemsEnzyme />);
+describe('Check view item', () => {
+  test('check view', () => {
+    let wrapper = shallow(<ItemsEnzyme />);
+    expect(
+      wrapper.findWhere(node => node.prop('testID') === 'todo-item'),
+    ).toBeTruthy();
   });
 });
